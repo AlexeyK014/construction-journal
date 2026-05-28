@@ -1,0 +1,18 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model WorkLog {
+  id         Int      @id @default(autoincrement())
+  date       DateTime
+  workType   String
+  volume     Float
+  unit       String
+  workerName String
+  createdAt  DateTime @default(now())
+}
