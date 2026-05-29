@@ -64,7 +64,8 @@ function App() {
     const loadLogs = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:5000/logs"
+          // "http://localhost:5000/logs"
+          "https://construction-journal.onrender.com/logs"
         );
 
         setLogs(response.data);
@@ -81,7 +82,7 @@ function App() {
     setLoading(true);
 
     try {
-      const response = await axios.get("http://localhost:5000/logs");
+      const response = await axios.get("https://construction-journal.onrender.com/logs");
       setLogs(response.data);
     } catch (error) {
       console.error(error);
@@ -108,7 +109,7 @@ function App() {
     try {
       if (editingId) {
         await axios.put(
-          `http://localhost:5000/logs/${editingId}`,
+          `https://construction-journal.onrender.com/logs/${editingId}`,
           {
             ...formData,
             volume: Number(formData.volume),
@@ -116,7 +117,7 @@ function App() {
         );
       } else {
         await axios.post(
-          "http://localhost:5000/logs",
+          "https://construction-journal.onrender.com/logs",
           {
             ...formData,
             volume: Number(formData.volume),
@@ -154,7 +155,7 @@ function App() {
 
     if (!confirmed) return;
     try {
-      await axios.delete(`http://localhost:5000/logs/${id}`);
+      await axios.delete(`https://construction-journal.onrender.com/logs/${id}`);
       refreshLogs();
       toast.success("Запись удалена");
     } catch (error) {
@@ -370,35 +371,6 @@ function App() {
               </tr>
             ))
           )}
-          {/* {filteredLogs.map((log) => (
-            <tr key={log.id}>
-              <td>
-                {new Date(log.date).toLocaleDateString()}
-              </td>
-
-              <td>{log.workType}</td>
-
-              <td>
-                {log.volume} {log.unit}
-              </td>
-
-              <td>{log.workerName}</td>
-
-              <td style={{ display: "flex", gap: "8px" }}>
-                <button
-                  onClick={() => handleEdit(log)}
-                >
-                  Редактировать
-                </button>
-
-                <button
-                  onClick={() => handleDelete(log.id)}
-                >
-                  Удалить
-                </button>
-              </td>
-            </tr>
-          ))} */}
         </tbody>
       </table>
     </div>

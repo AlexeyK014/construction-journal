@@ -9,9 +9,6 @@ const prisma = new PrismaClient();
 app.use(cors());
 app.use(express.json());
 
-/**
- * GET ALL LOGS
- */
 app.get("/logs", async (req, res) => {
   try {
     const logs = await prisma.workLog.findMany({
@@ -28,9 +25,6 @@ app.get("/logs", async (req, res) => {
   }
 });
 
-/**
- * CREATE LOG
- */
 app.post("/logs", async (req, res) => {
   try {
     const { date, workType, volume, unit, workerName } = req.body;
@@ -59,9 +53,6 @@ app.post("/logs", async (req, res) => {
   }
 });
 
-/**
- * DELETE LOG
- */
 app.delete("/logs/:id", async (req, res) => {
   try {
     const id = Number(req.params.id);
